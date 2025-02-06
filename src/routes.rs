@@ -1,5 +1,5 @@
 use actix_web::{web, get, post, Responder, HttpResponse};
-use go_maro_api;
+use go_maro_api::models::NewLink;
 
 #[get("/{id}")]
 async fn index(path: web::Path<String>) -> impl Responder {
@@ -19,6 +19,16 @@ async fn index(path: web::Path<String>) -> impl Responder {
 }
 
 #[post("/")]
-async fn post(req: web::Form<go_maro_api::models::NewLink>) -> impl Responder {
-    go_maro_api::create_link(req.source.clone(), req.alias.clone())
+async fn post(req: web::Form<NewLink>) -> impl Responder {
+    if req.source.contains(char::is_whitespace) || req.alias.contains(char::is_whitespace) {
+        return HttpResponse::BadRequest()
+            .body("Body contains Whitespace!")
+    }
+
+    let new_post = NewLink { 
+        source: req.source.to_lowercase(), 
+        alias: req.alias.to_lowercase() 
+    };
+
+    go_maro_api::create_link(new_post)
 }
