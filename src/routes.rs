@@ -1,6 +1,5 @@
-use actix_web::{get, web, Responder, HttpResponse};
-
-use crate::db;
+use actix_web::{web, get, post, Responder, HttpResponse};
+use go_maro_api;
 
 #[get("/{id}")]
 async fn index(path: web::Path<String>) -> impl Responder {
@@ -16,5 +15,10 @@ async fn index(path: web::Path<String>) -> impl Responder {
             .body("Request Invalid")
     }
 
-    db::get(id)
+    go_maro_api::get_link(id)
+}
+
+#[post("/")]
+async fn post(req: web::Form<go_maro_api::models::NewLink>) -> impl Responder {
+    go_maro_api::create_link(req.source.clone(), req.alias.clone())
 }
