@@ -1,4 +1,4 @@
-use actix_web::{HttpResponse, web::Form};
+use actix_web::HttpResponse;
 
 use diesel::prelude::*;
 use dotenv::dotenv;
