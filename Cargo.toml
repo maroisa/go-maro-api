@@ -2,15 +2,16 @@
 name = "go-maro-api"
 version = "0.1.0"
 edition = "2021"
+default-run = "main"
 
 [lib]
 name = "go_maro_api"
-path = "src/diesel/lib.rs"
+
 
 [dependencies]
-diesel = { version = "2.2", features = ["postgres", "chrono"] }
-chrono = { version = "0.4.39", features = ["serde"]}
+axum = "0.8.1"
+chrono = { version = "0.4.39", features = ["serde"] }
+diesel = { version = "2.2.7", features = ["chrono", "postgres", "r2d2"] }
 dotenv = "0.15.0"
-actix-web = "4"
 serde = { version = "1.0.217", features = ["derive"] }
-env_logger = "0.11.6"
+tokio = { version = "1.43.0", features = ["full"] }

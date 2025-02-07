@@ -1,9 +1,9 @@
 services:
-  db:
-    image: postgres:17-alpine
-    ports:
-    - 5432:5432
-    environment:
-      POSTGRES_DB: go_maro
-      POSTGRES_USER: budiman
-      POSTGRES_PASSWORD: loremipsum
+    db:
+        image: postgres:17-alpine
+        environment:
+            POSTGRES_DB: go_maro
+            POSTGRES_USER: lorem
+            POSTGRES_PASSWORD: ipsum
+        ports:
+        - "5432:5432"
