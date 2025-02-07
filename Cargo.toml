@@ -2,11 +2,13 @@
 name = "go-maro-api"
 version = "0.1.0"
 edition = "2021"
-default-run = "main"
 
 [lib]
 name = "go_maro_api"
 
+[[bin]]
+name = "go_maro_api"
+path = "./src/web/main.rs"
 
 [dependencies]
 axum = "0.8.1"

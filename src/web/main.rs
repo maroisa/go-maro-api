@@ -1,7 +1,7 @@
-mod routes;
-
 use go_maro_api::get_pool;
 use axum::{Router, routing};
+
+mod routes;
 
 #[tokio::main]
 async fn main() {
