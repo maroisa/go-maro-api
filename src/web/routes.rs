@@ -1,7 +1,7 @@
 use go_maro_api::*;
 use go_maro_api::models::NewLink;
 use axum::{
-    extract::{State, Path, Json, Form},
+    extract::{State, Path, Json},
     response::IntoResponse,
     http::StatusCode
 };
@@ -26,7 +26,7 @@ pub async fn get_link(State(pool): State<PgPool>, Path(alias): Path<String>) -> 
         Err(_) => StatusCode::INTERNAL_SERVER_ERROR.into_response()
     }
 }
-pub async fn create_link(State(pool): State<PgPool>, Form(data): Form<NewLink>) -> impl IntoResponse {
+pub async fn create_link(State(pool): State<PgPool>, Json(data): Json<NewLink>) -> impl IntoResponse {
     let mut conn = pool.get().expect("Failed to get pool");
 
     let new_link = NewLink {
